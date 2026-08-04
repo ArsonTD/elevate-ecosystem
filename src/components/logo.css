@@ -1,0 +1,53 @@
+/* Logo de Elevate: badge circular que recorta la flecha al subir */
+
+.logo {
+  --logo-size: 2rem;
+  --arrow-delay: 0s;
+  display: inline-flex;
+  align-items: center;
+  gap: .42em;
+  font-size: var(--logo-size);
+  color: var(--black);
+  line-height: 1;
+}
+
+/* El círculo es el contenedor: la flecha se recorta contra su borde
+   mientras sube desde abajo */
+.logo_badge {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+  border: max(1.6px, .075em) solid currentColor;
+  border-radius: 50%;
+}
+
+.logo_arrow {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+}
+
+/* Estado de partida: fuera del círculo, por debajo */
+.logo_arrow.is-rising {
+  animation: logoArrowUp .55s var(--ease-expo) var(--arrow-delay) both;
+}
+
+@keyframes logoArrowUp {
+  0%   { transform: translateY(120%); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+.logo_word {
+  font-family: var(--font-primary);
+  font-size: .66em;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+/* Sin animación: la flecha aparece ya centrada */
+@media (prefers-reduced-motion: reduce) {
+  .logo_arrow.is-rising { animation: none; }
+}

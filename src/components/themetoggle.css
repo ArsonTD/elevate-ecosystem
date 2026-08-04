@@ -1,0 +1,44 @@
+/* Toggle de tema: cápsula con crossfade + giro entre sol y luna */
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--nav-grey);
+  color: var(--black);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform .3s var(--ease-expo);
+}
+
+.theme-toggle:hover { transform: translateY(-2px); }
+
+.tt_icons {
+  position: relative;
+  display: block;
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.tt_icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity .35s var(--ease-expo), transform .45s var(--ease-expo);
+}
+
+/* Claro: se ve el sol. Oscuro: se ve la luna. */
+.tt_sun  { opacity: 1; transform: rotate(0) scale(1); }
+.tt_moon { opacity: 0; transform: rotate(-70deg) scale(.5); }
+
+.theme-toggle.is-dark .tt_sun  { opacity: 0; transform: rotate(70deg) scale(.5); }
+.theme-toggle.is-dark .tt_moon { opacity: 1; transform: rotate(0) scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tt_icon { transition: opacity .15s linear; transform: none !important; }
+}

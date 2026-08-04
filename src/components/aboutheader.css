@@ -1,0 +1,70 @@
+/* Header del About: titular centrado + escenario del prisma 3D */
+
+/* Sin overflow clip: el prisma debe seguir visible al bajar con el
+   scroll y cruzar el límite de la sección (como el original) */
+.section_ah {
+  padding-top: 9rem;
+  position: relative;
+  z-index: 3;
+}
+
+.ah_container {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.ah_component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.ah_label { visibility: hidden; }
+
+.ah_title {
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  line-height: 1;
+  visibility: hidden;
+  text-wrap: balance;
+}
+
+/* Escenario del cubo: más grande y superpuesto al titular
+   (baja con el scroll revelando el texto) */
+.ah_cube-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  margin-top: -26vh;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.ah_cube-mount {
+  width: min(92vh, 96vw);
+  height: 92vh;
+  min-height: 34rem;
+  visibility: hidden;
+}
+
+.ah_cube-mount canvas { width: 100%; height: 100%; }
+
+/* Fallback sin WebGL */
+.ah_cube-mount.is-fallback {
+  visibility: visible;
+  border-radius: 3vh;
+  background:
+    linear-gradient(rgba(0,0,0,.42), transparent 22%),
+    url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=640&h=1180&q=80') center / cover no-repeat #0a0a0a;
+  max-width: 38vh;
+}
+
+@media (max-width: 767px) {
+  .section_ah { padding-top: 7rem; }
+  .ah_cube-stage { margin-top: -16vh; }
+  .ah_cube-mount { height: 66vh; min-height: 26rem; }
+}

@@ -1,0 +1,37 @@
+/* Card de equipo: retrato 4:5 redondeado, nombre bold, rol gris */
+
+.tcard { width: 100%; }
+
+.tcard_media {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  background: var(--white);
+}
+
+.tcard_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Avatar placeholder: gradiente + iniciales (se sustituye por el
+   retrato real cuando Elevate entregue las fotos) */
+.tcard_avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tcard_avatar span {
+  color: rgba(255, 255, 255, .92);
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.tcard_name { margin-top: 1.1rem; font-size: 1.15rem; font-weight: 600; }
+
+.tcard_role { margin-top: .3rem; color: var(--grey-300); font-size: .92rem; }

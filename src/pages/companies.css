@@ -1,0 +1,149 @@
+/* Companies: grid tipo portfolio — cabecera centrada, filtros pill
+   y tarjetas con imagen + tag + meta (referencia GSV) */
+
+.cos_head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.cos_title { font-size: clamp(3rem, 6vw, 5rem); }
+
+.cos_sub { color: var(--grey-300); max-width: 34rem; }
+
+.cos_filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 3rem;
+}
+
+.cos_filter {
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--grey-100);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--grey-300);
+  transition: color .25s, background .25s, border-color .25s;
+}
+
+.cos_filter:hover { color: var(--black); border-color: var(--grey-300); }
+
+.cos_filter.is-active {
+  background: var(--grey-900);
+  border-color: var(--grey-900);
+  color: var(--white);
+}
+
+.cos_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.cos_card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-huge);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--grey-100);
+  transition: transform .45s var(--ease-expo), box-shadow .45s var(--ease-expo);
+}
+
+.cos_card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -30px var(--shadow-strong);
+}
+
+.cos_card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.cos_card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease-expo);
+}
+
+.cos_card:hover .cos_card-media img { transform: scale(1.05); }
+
+.cos_card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, .38);
+}
+
+.cos_card-tag {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  padding: .4rem .8rem;
+  border-radius: var(--radius-small);
+  background: rgba(10, 10, 10, .45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+/* Nombre centrado sobre la foto — se sustituye por el logo real
+   de cada empresa cuando Elevate entregue los assets */
+.cos_card-logo {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.cos_card-body {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.cos_card-desc { color: var(--grey-300); font-size: .95rem; }
+
+.cos_card-meta {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: .6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--grey-100);
+}
+
+.cos_meta-item { display: flex; flex-direction: column; gap: .2rem; }
+
+.cos_meta-label {
+  font-family: var(--font-detail);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--grey-300);
+}
+
+.cos_meta-value { font-size: .9rem; font-weight: 500; }
+
+@media (max-width: 900px) {
+  .cos_grid { grid-template-columns: 1fr; }
+}

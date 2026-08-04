@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevate — Solutions for your whole property</title>
+    <meta name="description" content="Elevate is an ecosystem of skilled-trade companies in Knoxville, TN — lighting, painting, remodeling, moving, carpentry and AV. One entry point routes your project to the right team." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <script>
+      /* Fija el tema antes del primer paint: sin destello al recargar.
+         Por defecto SIEMPRE claro; el oscuro solo si el usuario lo
+         elige con el toggle (no se sigue el tema del sistema). */
+      (function () {
+        try {
+          var t = localStorage.getItem('elevate-theme')
+          document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light')
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

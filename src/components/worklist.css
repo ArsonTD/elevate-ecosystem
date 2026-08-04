@@ -1,0 +1,116 @@
+/* Trabajos: imagen 16/9 gigante + tarjeta gradiente flotante que
+   sobresale del borde + pill que sigue el cursor */
+
+.work_head {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+}
+
+.work_title { font-size: clamp(3rem, 6vw, 5rem); }
+
+.work_number-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  padding: 0 .6rem;
+  border: 1px solid var(--grey-100);
+  border-radius: 999px;
+}
+
+.work_number {
+  font-family: var(--font-detail);
+  font-size: .95rem;
+  font-weight: 500;
+}
+
+.work_list {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+  margin-top: 4.5rem;
+}
+
+.work_block { display: block; }
+
+.work_images-wrap { position: relative; width: 100%; }
+
+.work_image-main {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: var(--radius-huge);
+  overflow: hidden;
+}
+
+.work_img-main {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Tarjeta secundaria que asoma por el borde derecho */
+.work_image-second {
+  position: absolute;
+  z-index: 4;
+  top: 20%;
+  right: -8%;
+  width: 24%;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px var(--shadow-strong);
+  will-change: transform;
+}
+
+.work_img-second {
+  width: 130%;
+  height: 130%;
+  max-width: none;
+  object-fit: cover;
+  position: absolute;
+  top: -15%;
+  left: -15%;
+}
+
+.work_infos {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin-top: 1.4rem;
+}
+
+.work_desc { color: var(--grey-300); font-size: 1rem; }
+
+/* Pill que sigue el cursor */
+.work_pill {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  padding: .5rem .875rem;
+  border-radius: var(--radius-small);
+  background: rgba(10, 10, 10, .3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--white);
+  font-size: .75rem;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.6);
+  margin: -1rem 0 0 1rem;
+}
+
+@media (max-width: 767px) {
+  .work_list { gap: 4.5rem; }
+  .work_image-second { right: -4%; width: 32%; }
+  .work_pill { display: none; }
+}

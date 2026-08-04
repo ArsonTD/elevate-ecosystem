@@ -1,0 +1,161 @@
+/* Hero: ventana de video que se abre sola al cargar la página */
+
+.sabout_wrapper {
+  /* Tamaño al que se abre la ventana (lo usa la timeline de GSAP) */
+  --sabout-w: calc(100vw - 3rem);
+  --sabout-h: calc(100svh - 11rem);
+
+  position: relative;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sabout_note {
+  position: absolute;
+  bottom: 2.2rem;
+  z-index: 3;
+  font-family: var(--font-detail);
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--note);
+}
+
+/* Ubicación en la esquina inferior izquierda */
+.sabout_location {
+  position: absolute;
+  bottom: 2rem;
+  left: 3rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sabout_globe { width: 1.35rem; height: 1.35rem; }
+
+.sabout_globe-spin {
+  transform-origin: center;
+  animation: saboutGlobeSpin 3s linear infinite;
+}
+
+@keyframes saboutGlobeSpin {
+  from { transform: scaleX(1); }
+  50%  { transform: scaleX(.15); }
+  to   { transform: scaleX(1); }
+}
+
+.sabout_stage {
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sabout_component {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------
+   Trío del hero. Contraste editorial en vez de tres textos
+   idénticos: cursiva serif para el saludo y el conector, y el
+   grotesque del wordmark para la marca, que así queda anclada.
+   Se retiran cuando la ventana se abre.
+   ------------------------------------------------------------ */
+
+.sabout_welcome,
+.sabout_heading {
+  position: absolute;
+  z-index: 2;
+  white-space: nowrap;
+  line-height: 1;
+  font-size: clamp(2.1rem, 4.8vw, 3.75rem);
+}
+
+/* "Welcome" y "We are": cursiva serif */
+.sabout_welcome,
+.sabout_heading.h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.sabout_welcome {
+  /* misma separación de la ventana que los textos laterales (1.25rem) */
+  bottom: calc(50% + 9.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--grey-300);
+}
+
+/* "Elevate": la marca, en el mismo grotesque del logo */
+.sabout_heading.h2 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: -.035em;
+}
+
+/* Flanquean la ventana pequeña */
+.sabout_heading.h1 { right: calc(50% + 14.25rem); }
+.sabout_heading.h2 { left: calc(50% + 14.25rem); }
+
+/* Ventana: parte pequeña y GSAP la lleva a --sabout-w / --sabout-h */
+.sabout_img-wrap {
+  position: relative;
+  width: 26rem;
+  height: 17rem;
+  border-radius: 1rem;
+  overflow: clip;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: width, height;
+}
+
+/* El video es fijo a pantalla completa: la ventana solo lo recorta */
+.sabout_img {
+  width: 100vw;
+  height: 100svh;
+  min-width: 100vw;
+  min-height: 100svh;
+  max-width: none;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Titular superpuesto sobre el video, ya abierto */
+.sabout_img-text {
+  position: absolute;
+  z-index: 2;
+  color: #fff;
+  font-size: clamp(2.2rem, 5.5vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  text-align: center;
+  max-width: 18ch;
+  text-shadow: 0 4px 34px rgba(0, 0, 0, .45);
+  visibility: hidden; /* la timeline la revela */
+}
+
+@media (max-width: 900px) {
+  .sabout_wrapper {
+    --sabout-w: calc(100vw - 1.5rem);
+    --sabout-h: calc(100svh - 9rem);
+  }
+  .sabout_location { left: 1.25rem; }
+  .sabout_heading.h1 { right: calc(50% + 9.5rem); }
+  .sabout_heading.h2 { left: calc(50% + 9.5rem); }
+  .sabout_img-wrap { width: 19rem; height: 12rem; }
+}
