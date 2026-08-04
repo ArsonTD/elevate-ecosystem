@@ -21,9 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Habilita Pages con origen "GitHub Actions" si aún no lo está,
-      # para no depender de tocarlo a mano en Settings
+      # Intenta habilitar Pages con origen "GitHub Actions". Si el token
+      # del repo no tiene permiso para crearlo, no debe tumbar el build:
+      # basta con activarlo una vez a mano en Settings → Pages.
       - uses: actions/configure-pages@v5
+        continue-on-error: true
         with:
           enablement: true
 
