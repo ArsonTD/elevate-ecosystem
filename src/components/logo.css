@@ -5,7 +5,7 @@
   --arrow-delay: 0s;
   display: inline-flex;
   align-items: center;
-  gap: .42em;
+  gap: .3em;
   font-size: var(--logo-size);
   color: var(--black);
   line-height: 1;

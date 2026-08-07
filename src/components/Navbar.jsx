@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import GradientButton from './GradientButton'
 import ThemeToggle from './ThemeToggle'
@@ -13,10 +13,10 @@ const LINKS = [
   { label: 'Team', to: '/team' },
 ]
 
-export default function Navbar() {
+/** `pathname` llega de la página Astro (ruta lógica, sin prefijo base). */
+export default function Navbar({ pathname = '/' }) {
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {

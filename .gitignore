@@ -1,6 +1,8 @@
 node_modules
 dist
 dist-ssr
+# Caché de tipos que genera Astro
+.astro
 
 # Material fuente pesado (masters de video/foto): no va al repo
 *.mov

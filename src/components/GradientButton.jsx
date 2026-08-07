@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
+import Link from './Link'
 
 /**
  * Botón con "gradient balls": bolas de gradiente borrosas que se
  * encienden al hover dentro del botón + un glow exterior detrás.
- * Acepta `href` (ancla/externo) o `to` (ruta interna con react-router).
+ * Acepta `href` (ancla/externo) o `to` (ruta interna del sitio).
  */
 export default function GradientButton({ children, href = '#', to, variant = '', onClick }) {
   const balls = (

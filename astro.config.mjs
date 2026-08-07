@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
 
 export default defineConfig({
-  plugins: [react()],
+  integrations: [react()],
   /**
    * En GitHub Pages el sitio vive en https://usuario.github.io/<repo>/,
    * así que el build necesita ese prefijo. El workflow lo inyecta con

@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Company from '../../views/Company.jsx'
+import { COMPANIES } from '../../lib/companies'
+
+/** Una página estática por empresa (antes /companies/:slug del router). */
+export function getStaticPaths() {
+  return COMPANIES.map((c) => ({ params: { slug: c.slug } }))
+}
+
+const { slug } = Astro.params
+---
+
+<Layout pathname={`/companies/${slug}`}>
+  <Company client:load slug={slug} />
+</Layout>

@@ -1,0 +1,25 @@
+---
+import { withBase } from '../lib/paths'
+
+/**
+ * /works era una redirección del SPA hacia /companies. El `redirects`
+ * de astro.config no antepone el prefijo base en el HTML estático,
+ * así que la redirección se hace aquí con la ruta ya resuelta.
+ */
+const target = withBase('/companies')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevate — Solutions for your whole property</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target)
+    </script>
+  </head>
+  <body></body>
+</html>

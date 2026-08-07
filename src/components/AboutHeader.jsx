@@ -223,10 +223,18 @@ export default function AboutHeader() {
       renderer.render(scene, camera)
     }
 
-    raf = requestAnimationFrame(loop)
+    // Renderiza solo mientras el prisma está en pantalla: el bucle sube
+    // la textura del flow al GPU en cada frame y dejarlo corriendo tras
+    // salir del viewport producía tirones en el resto de la página.
+    let running = false
+    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(loop) } }
+    const stop = () => { if (running) { running = false; cancelAnimationFrame(raf) } }
+    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()))
+    io.observe(mount)
 
     return () => {
-      cancelAnimationFrame(raf)
+      stop()
+      io.disconnect()
       window.removeEventListener('mousemove', onMove)
       ro.disconnect()
       st.scrollTrigger?.kill()

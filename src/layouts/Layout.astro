@@ -1,0 +1,77 @@
+---
+import '../styles/global.css'
+import Preloader from '../components/Preloader.jsx'
+import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx'
+import SmoothScroll from '../components/SmoothScroll.jsx'
+
+/**
+ * Marco compartido de todas las páginas (lo que antes eran index.html
+ * + App.jsx). `pathname` es la ruta lógica de la página, sin el
+ * prefijo base ("/", "/about", "/companies/monarch"…): la usa el
+ * Navbar para marcar el enlace activo.
+ */
+const { pathname = '/' } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevate — Solutions for your whole property</title>
+    <meta name="description" content="Elevate is an ecosystem of skilled-trade companies in Knoxville, TN — lighting, painting, remodeling, moving, carpentry and AV. One entry point routes your project to the right team." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <script is:inline>
+      /* Fija el tema antes del primer paint: sin destello al recargar.
+         Por defecto SIEMPRE claro; el oscuro solo si el usuario lo
+         elige con el toggle (no se sigue el tema del sistema). */
+      (function () {
+        try {
+          var t = localStorage.getItem('elevate-theme')
+          document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light')
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+      })()
+    </script>
+    <script is:inline define:vars={{ siteBase: import.meta.env.BASE_URL }}>
+      /* Réplica del comportamiento del SPA: el preloader solo aparece en
+         la carga inicial (entrada externa, directa o recarga), nunca al
+         navegar entre páginas del sitio. Se decide antes del primer
+         paint — la cortina viene pre-renderizada en el HTML y este flag
+         controla si se ve (ver preloader.css). */
+      (function () {
+        try {
+          var nav = performance.getEntriesByType('navigation')[0]
+          var type = nav ? nav.type : 'navigate'
+          var visited = false
+          try { visited = sessionStorage.getItem('elevate-visited') === '1' } catch (e) {}
+          var internal = document.referrer.indexOf(location.origin + siteBase) === 0
+          /* Cortina solo al ENTRAR al sitio o al recargar (F5), como el SPA:
+             - recarga → cortina
+             - navegación interna → nunca (referrer interno o pestaña ya visitada)
+             - back/forward → nunca, aunque el bfcache no aplique y el documento
+               se recree con su referrer original externo (por eso `visited`) */
+          if (type === 'reload' || !(internal || visited)) {
+            document.documentElement.classList.add('is-preloading')
+          }
+          try { sessionStorage.setItem('elevate-visited', '1') } catch (e) {}
+        } catch (e) {
+          document.documentElement.classList.add('is-preloading')
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <Preloader client:load />
+    <div class="page-wrapper">
+      <Navbar client:load pathname={pathname} />
+      <slot />
+      <Footer client:load />
+    </div>
+    <SmoothScroll client:load />
+  </body>
+</html>

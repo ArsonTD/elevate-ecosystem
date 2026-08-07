@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import { COMPANIES, ELEVATE_SOCIAL } from '../lib/companies'
 import SocialIcon, { SOCIAL_LABEL } from './SocialIcon'

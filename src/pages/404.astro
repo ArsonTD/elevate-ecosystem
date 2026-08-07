@@ -1,0 +1,27 @@
+---
+/**
+ * Réplica del catch-all del SPA (<Route path="*" → home>): GitHub Pages
+ * sirve este archivo en cualquier ruta desconocida y de aquí se vuelve
+ * al home.
+ */
+const home = import.meta.env.BASE_URL
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevate — Solutions for your whole property</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${home}`} />
+    <script is:inline define:vars={{ home }}>
+      /* Como el SPA: /companies/<slug-desconocido> vuelve al listado de
+         empresas; cualquier otra ruta desconocida, al home. El meta
+         refresh de arriba queda como fallback sin JS. */
+      var rest = location.pathname.slice(home.length - 1)
+      location.replace(rest.indexOf('/companies/') === 0 ? home + 'companies' : home)
+    </script>
+  </head>
+  <body></body>
+</html>

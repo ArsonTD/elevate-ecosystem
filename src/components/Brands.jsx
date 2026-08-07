@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import { COMPANIES, asset } from '../lib/companies'
 import './brands.css'

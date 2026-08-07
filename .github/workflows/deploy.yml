@@ -42,11 +42,8 @@ jobs:
           # El sitio se sirve desde /<repo>/, no desde la raíz
           VITE_BASE: /${{ github.event.repository.name }}/
 
-      # Pages devuelve 404.html en rutas que no existen como archivo.
-      # Al ser una copia del index, el SPA arranca y React Router
-      # resuelve la ruta (necesario para /companies, /contact, etc.).
-      - name: SPA fallback
-        run: cp dist/index.html dist/404.html
+      # Ya no hace falta el fallback del SPA: Astro genera un HTML real
+      # por ruta y su propio 404.html (src/pages/404.astro).
 
       - uses: actions/upload-pages-artifact@v3
         with:

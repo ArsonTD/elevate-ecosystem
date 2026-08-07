@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getTheme, toggleTheme } from '../lib/theme'
 import './themetoggle.css'
 
 /**
  * Botón sol/luna: alterna el tema y lo recuerda. El sitio arranca
  * siempre en claro; el oscuro es una elección del usuario.
+ *
+ * El estado inicial es "light" porque el HTML se pre-renderiza en el
+ * servidor, donde no existe el documento; al montar se sincroniza con
+ * el tema real que fijó el script inline del <head>.
  */
 export default function ThemeToggle() {
-  const [theme, setThemeState] = useState(getTheme)
+  const [theme, setThemeState] = useState('light')
+
+  useEffect(() => {
+    setThemeState(getTheme())
+  }, [])
 
   const isDark = theme === 'dark'
 

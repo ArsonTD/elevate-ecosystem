@@ -15,6 +15,18 @@
 
 .preloader_logo { color: var(--black); }
 
+/* Estado inicial pre-hidratación: la cortina llega pre-renderizada en el
+   HTML y GSAP aún no corre — logo y barra nacen ocultos y la barra vacía,
+   exactamente como arranca la animación (los estados finales los pone
+   GSAP con fromTo al hidratar). */
+.preloader_logo,
+.preloader_bar {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader_bar-fill { transform: scaleX(0); }
+
 .preloader_bar {
   width: clamp(10rem, 20vw, 14rem);
   height: 2px;
@@ -34,4 +46,11 @@
 html.is-preloading,
 html.is-preloading body {
   overflow: hidden;
+}
+
+/* La cortina viene pre-renderizada en el HTML de cada página; si el
+   script inline del <head> no marcó la precarga (navegación interna),
+   nunca llega a verse. */
+html:not(.is-preloading) .preloader {
+  display: none;
 }

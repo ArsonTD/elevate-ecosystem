@@ -6,7 +6,12 @@ la empresa correcta.
 
 ## Stack
 
-React 19 · Vite 7 · React Router 7 · GSAP + ScrollTrigger · Lenis · Three.js
+Astro 5 · React 19 (islas) · GSAP + ScrollTrigger · Lenis · Three.js
+
+Cada ruta es una página estática de Astro (`src/pages/*.astro`) que
+pre-renderiza y monta las vistas React de `src/views/` como islas
+(`client:load`). Las animaciones y la interacción siguen siendo los
+mismos componentes React de siempre.
 
 ## Desarrollo
 
@@ -29,7 +34,7 @@ npm run preview
 | `/` | Hero de video, marquee de empresas, escenarios y CTA |
 | `/about` | Historia del ecosistema, prisma 3D, cómo funciona, valores |
 | `/companies` | Grid filtrable de empresas |
-| `/companies/:slug` | Ficha de empresa: servicios, galería y cross-discovery |
+| `/companies/[slug]` | Ficha de empresa: servicios, galería y cross-discovery |
 | `/team` | Equipo completo |
 | `/contact` | Formulario router por servicio |
 
@@ -41,8 +46,9 @@ servicio → empresa del formulario) viven en un solo sitio:
 
 `.github/workflows/deploy.yml` publica en GitHub Pages con cada push a
 `main`. El build recibe `VITE_BASE=/<repo>/` porque el sitio se sirve
-desde un subdirectorio, y copia `index.html` a `404.html` para que las
-rutas del SPA funcionen al entrar directo.
+desde un subdirectorio (lo lee `astro.config.mjs`). Astro genera un
+HTML real por ruta más su propio `404.html`, así que ya no hace falta
+el fallback del SPA.
 
 ## Pendiente
 

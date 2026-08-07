@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import Link from '../components/Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import { getCompany, photo, asset } from '../lib/companies'
 import SocialIcon, { SOCIAL_LABEL } from '../components/SocialIcon'
@@ -12,9 +12,11 @@ const LINK_ORDER = ['site', 'instagram', 'facebook', 'linkedin']
  * Plantilla compartida de empresa (referencia GSV): panel de info a la
  * izquierda + imagen a la derecha, servicios y especialidades, y
  * cross-discovery con las empresas relacionadas del grupo.
+ *
+ * `slug` llega como prop desde companies/[slug].astro, que genera una
+ * página estática por empresa (getStaticPaths solo emite slugs válidos).
  */
-export default function Company() {
-  const { slug } = useParams()
+export default function Company({ slug }) {
   const company = getCompany(slug)
   const ref = useRef(null)
 
@@ -48,7 +50,7 @@ export default function Company() {
     return () => ctx.revert()
   }, [slug, company])
 
-  if (!company) return <Navigate to="/companies" replace />
+  if (!company) return null
 
   // Solo los canales que existen: nada de enlaces rotos
   const links = LINK_ORDER

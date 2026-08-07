@@ -17,7 +17,9 @@
 .values_imgs-wrap {
   position: relative;
   width: 100%;
-  height: min(78vh, 44rem);
+  /* La imagen llena la columna sticky de arriba a abajo
+     (100vh menos el padding vertical del wrapper) */
+  height: 100%;
   border-radius: var(--radius-huge);
   overflow: clip;
 }
@@ -70,6 +72,11 @@
 .values_head .heading-h4 {
   max-width: 28rem;
   font-size: clamp(2.25rem, 3.6vw, 3.4rem);
+}
+
+/* El número (01/02/03) algo más presente que el label estándar */
+.values_head .text-style-label {
+  font-size: 1.1rem;
 }
 
 .values_text {
