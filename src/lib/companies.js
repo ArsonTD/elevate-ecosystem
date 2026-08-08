@@ -67,6 +67,10 @@ export const COMPANIES = [
     img: '/photos/afterimage-card.jpg',
     gallery: ['/photos/afterimage-lighting.jpg'],
     grad: ['#ffb347', '#2b1600'],
+    // Video de la tarjeta pequeña del listado. Sin él, esa tarjeta cae
+    // al gradiente de `grad`.
+    cardVideo: '/video/card-afterimage-lighting.mp4',
+    cardPoster: '/video/card-afterimage-lighting-poster.jpg',
   },
   {
     slug: 'monarch',
@@ -87,9 +91,11 @@ export const COMPANIES = [
     phone: '865-214-7388',
     email: 'info@monarchdesignersolutions.com',
     seed: 'elv-co-remodel',
-    img: '/photos/monarch.jpg',
+    img: '/photos/monarch-lounge.jpg',
     gallery: ['/photos/monarch-living.jpg'],
     grad: ['#e8dfca', '#5a4a2f'],
+    cardVideo: '/video/card-monarch.mp4',
+    cardPoster: '/video/card-monarch-poster.jpg',
   },
   {
     slug: 'parallel',
@@ -110,7 +116,9 @@ export const COMPANIES = [
     phone: null,
     email: 'info@parallel.contractors',
     seed: 'elv-co-moving',
-    img: '/photos/parallel.jpg',
+    img: '/photos/parallel-foundation.jpg',
+    cardVideo: '/video/card-parallel.mp4',
+    cardPoster: '/video/card-parallel-poster.jpg',
     gallery: ['/photos/parallel-house.jpg', '/photos/parallel-painting.jpg'],
     grad: ['#9db8d2', '#1d2a3a'],
   },
@@ -129,6 +137,8 @@ export const COMPANIES = [
     email: null,
     seed: 'elv-co-carpentry',
     img: '/photos/cutting-edge.jpg',
+    cardVideo: '/video/card-cutting-edge.mp4',
+    cardPoster: '/video/card-cutting-edge-poster.jpg',
     gallery: ['/photos/cutting-edge-crew.jpg'],
     grad: ['#c98d5a', '#2e1c0e'],
   },
@@ -151,7 +161,9 @@ export const COMPANIES = [
     phone: '865-523-4018',
     email: 'info@avsdc.com',
     seed: 'elv-co-av',
-    img: '/photos/avs-media-room.jpg',
+    img: '/photos/avs-fireplace.jpg',
+    // Sin video todavía: la tarjeta pequeña se queda en foto fija.
+    cardPoster: '/photos/avs-card.jpg',
     gallery: ['/photos/avs-frame-tv.jpg'],
     grad: ['#7a5cff', '#120a2e'],
   },
@@ -170,6 +182,14 @@ export const COMPANIES = [
     email: null,
     seed: 'elv-co-painting',
     img: '1562259949-e8e7689d7828',
+    // Carrusel de la tarjeta pequeña: cruza entre estas fotos en bucle.
+    cardImages: [
+      '/photos/luv-card-1.jpg',
+      '/photos/luv-card-2.jpg',
+      '/photos/luv-card-3.jpg',
+      '/photos/luv-card-4.jpg',
+      '/photos/luv-card-5.jpg',
+    ],
     grad: ['#ff7a9e', '#3a0f1e'],
   },
 ]

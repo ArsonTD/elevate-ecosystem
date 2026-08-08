@@ -79,6 +79,11 @@
   left: -15%;
 }
 
+/* Carrusel de la tarjeta secundaria: las fotos se apilan y solo se ve
+   la primera hasta que GSAP toma el relevo (o para siempre, si el
+   usuario pidió motion reducido). */
+.work_card-slide + .work_card-slide { opacity: 0; }
+
 .work_infos {
   display: flex;
   flex-direction: column;

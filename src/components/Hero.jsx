@@ -13,12 +13,12 @@ const HEADINGS = ['One entry, every trade', 'Solutions, one team', 'Your project
  */
 const RING_IMGS = [
   { img: '/photos/afterimage-lighting.jpg', w: 950, h: 1800 }, // bano con colgantes
-  { img: '/photos/monarch.jpg', w: 1800, h: 950 },             // entrega de mobiliario
-  { img: '1581578731548-c64695cc6952', w: 520, h: 680 },       // stock: limpieza post-obra
+  { img: '/photos/monarch-mirror.jpg', w: 1012, h: 1800 },     // espejo de piel, Monarch
+  { img: '/photos/avs-great-room.jpg', w: 1800, h: 1350 },     // great room con Control4, AVS
   { img: '/photos/cutting-edge.jpg', w: 1800, h: 1012 },       // sala enmascarada
   { img: '/photos/finishing.jpg', w: 1800, h: 1012 },          // acabado de pared
-  { img: '1560448204-e02f11c3d0e2', w: 680, h: 520 },          // stock: sala terminada
-  { img: '/photos/parallel.jpg', w: 1800, h: 950 },            // sierra en obra
+  { img: '/photos/luv-painting-bath.jpg', w: 1800, h: 950 },   // bano empapelado, Luv Painting
+  { img: '/photos/parallel-concrete.jpg', w: 1800, h: 950 },   // vaciado de hormigon, Parallel
   { img: '1558036117-15d82a90b9b1', w: 680, h: 520 },          // stock: propiedad al atardecer
 ]
 

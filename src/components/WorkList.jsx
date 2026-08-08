@@ -1,8 +1,11 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
-import { COMPANIES, photo } from '../lib/companies'
+import { COMPANIES, asset, photo } from '../lib/companies'
 import './worklist.css'
+
+const SLIDE_HOLD = 2.8   // segundos que aguanta cada foto del carrusel
+const SLIDE_FADE = .8    // duración del cruce entre fotos
 
 const svgGradient = (c1, c2, angle = 35) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -87,6 +90,61 @@ export default function WorkList() {
     return () => ctx.revert()
   }, [])
 
+  // Las tarjetas pequeñas se animan solas: unas llevan video, otras un
+  // carrusel de fotos. En ambos casos solo arrancan cerca del viewport —
+  // son seis por página y dejarlas todas vivas encarece el scroll sin
+  // que se vea nada.
+  useEffect(() => {
+    const media = []
+
+    ref.current.querySelectorAll('.work_video-second').forEach((video) => {
+      media.push({
+        el: video,
+        play: () => {
+          if (video.preload === 'none') video.preload = 'auto'
+          video.play().catch(() => {})
+        },
+        stop: () => video.pause(),
+      })
+    })
+
+    if (!reducedMotion) {
+      ref.current.querySelectorAll('.work_card-carousel').forEach((box) => {
+        const slides = [...box.querySelectorAll('.work_card-slide')]
+        if (slides.length < 2) return
+
+        gsap.set(slides, { autoAlpha: 0 })
+        gsap.set(slides[0], { autoAlpha: 1 })
+
+        const tl = gsap.timeline({ repeat: -1, paused: true })
+        slides.forEach((slide, i) => {
+          const next = slides[(i + 1) % slides.length]
+          tl.to({}, { duration: SLIDE_HOLD })
+            .to(slide, { autoAlpha: 0, duration: SLIDE_FADE, ease: 'power2.inOut' })
+            .to(next, { autoAlpha: 1, duration: SLIDE_FADE, ease: 'power2.inOut' }, '<')
+        })
+
+        media.push({ el: box, play: () => tl.play(), stop: () => tl.pause(), tl })
+      })
+    }
+
+    if (!media.length) return
+
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        const item = media.find((m) => m.el === e.target)
+        if (item) (e.isIntersecting ? item.play() : item.stop())
+      }),
+      { rootMargin: '200px' },
+    )
+    media.forEach((m) => io.observe(m.el))
+
+    return () => {
+      io.disconnect()
+      media.forEach((m) => m.tl?.kill())
+    }
+  }, [])
+
   return (
     <section className="section_work" id="companies" ref={ref}>
       <div className="padding-global section-pad">
@@ -109,8 +167,36 @@ export default function WorkList() {
                         loading="lazy"
                       />
                     </div>
-                    <div className="work_image-second">
-                      <img className="work_img-second" src={svgGradient(c.grad[0], c.grad[1])} alt="" loading="lazy" />
+                    <div className={`work_image-second${c.cardImages ? ' work_card-carousel' : ''}`}>
+                      {c.cardVideo && !reducedMotion ? (
+                        <video
+                          className="work_img-second work_video-second"
+                          src={asset(c.cardVideo)}
+                          poster={asset(c.cardPoster)}
+                          muted
+                          loop
+                          playsInline
+                          preload="none"
+                          aria-hidden="true"
+                        />
+                      ) : c.cardImages ? (
+                        c.cardImages.map((src) => (
+                          <img
+                            className="work_img-second work_card-slide"
+                            src={asset(src)}
+                            key={src}
+                            alt=""
+                            loading="lazy"
+                          />
+                        ))
+                      ) : (
+                        <img
+                          className="work_img-second"
+                          src={c.cardPoster ? asset(c.cardPoster) : svgGradient(c.grad[0], c.grad[1])}
+                          alt=""
+                          loading="lazy"
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="work_infos">
