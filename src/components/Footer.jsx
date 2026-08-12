@@ -3,6 +3,7 @@ import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import { COMPANIES, ELEVATE_SOCIAL } from '../lib/companies'
 import SocialIcon, { SOCIAL_LABEL } from './SocialIcon'
+import Logo from './Logo'
 import './footer.css'
 
 /** Solo se pintan las redes que tengan URL real. */
@@ -37,7 +38,19 @@ export default function Footer() {
         autoAlpha: 0,
         duration: 1.4,
         ease: 'expo.out',
-        scrollTrigger: { trigger: ref.current, start: 'top 60%' },
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 60%',
+          // La flecha del logo sube al entrar el footer en pantalla: al
+          // cargar la página ocurriría muy por debajo del viewport
+          onEnter: () => {
+            const arrow = ref.current?.querySelector('.footer_brand .logo_arrow')
+            if (!arrow) return
+            arrow.classList.remove('is-rising')
+            void arrow.offsetWidth // fuerza reflow para reiniciar la animación
+            arrow.classList.add('is-rising')
+          },
+        },
       })
     }, ref)
     return () => ctx.revert()
@@ -90,7 +103,10 @@ export default function Footer() {
             <span>Knoxville, TN</span>
           </div>
 
-          <div className="footer_brand" aria-hidden="true">Elevate</div>
+          <div className="footer_brand" aria-hidden="true">
+            <Logo className="footer_brand-mark" size=".72em" withWord={false} />
+            <span className="footer_brand-word">Elevate</span>
+          </div>
         </div>
       </div>
     </footer>

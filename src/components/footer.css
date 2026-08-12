@@ -77,16 +77,35 @@
 
 .footer_divider { width: 1px; height: .9rem; background: var(--white-15); }
 
+/* Wordmark gigante con el icono del logo a su izquierda */
 .footer_brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .14em;
   margin-top: 2rem;
   margin-bottom: -.12em;
   font-size: clamp(5rem, 19vw, 21rem);
   font-weight: 500;
   letter-spacing: -.04em;
   line-height: .95;
-  text-align: center;
   user-select: none;
   will-change: transform;
+}
+
+/* El footer es la superficie invertida: el logo hereda su color en
+   vez del --black que usa por defecto */
+.footer_brand-mark {
+  color: inherit;
+  /* baja el círculo para centrarlo con la altura de las mayúsculas,
+     no con la caja de texto (que reserva sitio para descendentes) */
+  margin-top: .06em;
+}
+
+.footer_brand-word { display: block; }
+
+@media (max-width: 767px) {
+  .footer_brand { gap: .1em; }
 }
 
 @media (max-width: 767px) {
