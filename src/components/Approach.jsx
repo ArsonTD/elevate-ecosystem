@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
 import { photo } from '../lib/companies'
-import FlowVideo from './FlowVideo'
 import './approach.css'
 
 const ITEMS = [
@@ -13,12 +12,13 @@ const ITEMS = [
   {
     title: 'Smart routing',
     text: 'Each part of your inquiry reaches the right company automatically: lighting to Afterimage, paint to Luv Painting, remodeling to Monarch — with Elevate keeping a copy.',
-    flow: true,
+    img: '/photos/ecosystem-diagram.jpg', // esquema del ecosistema
+    diagram: true, // se muestra entero (contain), no recortado
   },
   {
     title: 'Coordinated work',
     text: 'The companies already know each other and schedule around each other. One property, several trades, zero chasing — that’s the point of the ecosystem.',
-    img: '1504307651254-35680f356dfd', // obra con varias cuadrillas a la vez
+    img: '/photos/coordinated-crew.jpg', // cuadrillas trabajando a la vez
   },
 ]
 
@@ -35,14 +35,18 @@ export default function Approach() {
       })
 
       gsap.utils.toArray('.approach_item').forEach((item, i) => {
-        gsap.fromTo(
-          item.querySelector('.approach_media'),
-          { scale: 1.25 },
-          {
-            scale: 1, ease: 'none',
-            scrollTrigger: { trigger: item, start: 'top bottom', end: 'top 30%', scrub: 1 },
-          },
-        )
+        // El zoom solo va en las fotos: sobre el diagrama recortaria
+        // los logos de los extremos
+        if (!item.querySelector('.approach_img-wrap.is-diagram')) {
+          gsap.fromTo(
+            item.querySelector('.approach_media'),
+            { scale: 1.25 },
+            {
+              scale: 1, ease: 'none',
+              scrollTrigger: { trigger: item, start: 'top bottom', end: 'top 30%', scrub: 1 },
+            },
+          )
+        }
         gsap.from(item.querySelector('.approach_content'), {
           y: 34, autoAlpha: 0, duration: .9, ease: 'expo.out', delay: i * .08,
           scrollTrigger: { trigger: item, start: 'top 82%' },
@@ -66,17 +70,13 @@ export default function Approach() {
           <div className="approach_items">
             {ITEMS.map((item) => (
               <div className="approach_item" key={item.title}>
-                <div className="approach_img-wrap">
-                  {item.flow
-                    ? <FlowVideo className="approach_media" />
-                    : (
-                      <img
-                        className="approach_media"
-                        src={photo(item.img, 1200, 800)}
-                        alt={item.title}
-                        loading="lazy"
-                      />
-                    )}
+                <div className={`approach_img-wrap ${item.diagram ? 'is-diagram' : ''}`}>
+                  <img
+                    className="approach_media"
+                    src={photo(item.img, 1200, 800)}
+                    alt={item.title}
+                    loading="lazy"
+                  />
                 </div>
                 <div className="approach_content">
                   <h3 className="heading-h6">{item.title}</h3>

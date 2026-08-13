@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import Link from './Link'
 import { gsap, reducedMotion } from '../lib/gsapSetup'
-import { COMPANIES, ELEVATE_SOCIAL } from '../lib/companies'
+import { COMPANIES, ELEVATE_SOCIAL, ELEVATE_CONTACT } from '../lib/companies'
 import SocialIcon, { SOCIAL_LABEL } from './SocialIcon'
 import Logo from './Logo'
 import './footer.css'
@@ -62,6 +62,13 @@ export default function Footer() {
         <div className="footer_wrap">
           <div className="footer_main">
             <div className="footer_group">
+              <div className="footer_label">About us</div>
+              <div className="footer_list">
+                <Link to="/about" className="footer_link">Elevate’s story</Link>
+              </div>
+            </div>
+
+            <div className="footer_group">
               <div className="footer_label">Pages</div>
               <div className="footer_lists">
                 <div className="footer_list">
@@ -77,22 +84,49 @@ export default function Footer() {
               </div>
             </div>
 
-            {SOCIALS.length > 0 && (
-              <div className="footer_social">
-                {SOCIALS.map(([type, url]) => (
-                  <a
-                    key={type}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="footer_social-link"
-                    aria-label={`Elevate on ${SOCIAL_LABEL[type]}`}
-                  >
-                    <SocialIcon type={type} />
+            <div className="footer_group footer_group--contact">
+              <div className="footer_label">Get in touch</div>
+              <address className="footer_address">
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(ELEVATE_CONTACT.address.join(', '))}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="footer_link"
+                >
+                  {ELEVATE_CONTACT.address.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </a>
+                {/* Teléfono y email: solo aparecen cuando existan */}
+                {ELEVATE_CONTACT.phone && (
+                  <a href={`tel:${ELEVATE_CONTACT.phone.replace(/[^\d+]/g, '')}`} className="footer_link">
+                    {ELEVATE_CONTACT.phone}
                   </a>
-                ))}
-              </div>
-            )}
+                )}
+                {ELEVATE_CONTACT.email && (
+                  <a href={`mailto:${ELEVATE_CONTACT.email}`} className="footer_link">
+                    {ELEVATE_CONTACT.email}
+                  </a>
+                )}
+              </address>
+
+              {SOCIALS.length > 0 && (
+                <div className="footer_social">
+                  {SOCIALS.map(([type, url]) => (
+                    <a
+                      key={type}
+                      href={url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="footer_social-link"
+                      aria-label={`Elevate on ${SOCIAL_LABEL[type]}`}
+                    >
+                      <SocialIcon type={type} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="footer_legal">

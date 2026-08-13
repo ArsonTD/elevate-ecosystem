@@ -155,7 +155,35 @@
     --sabout-h: calc(100svh - 9rem);
   }
   .sabout_location { left: 1.25rem; }
-  .sabout_heading.h1 { right: calc(50% + 9.5rem); }
-  .sabout_heading.h2 { left: calc(50% + 9.5rem); }
   .sabout_img-wrap { width: 19rem; height: 12rem; }
+
+  /* En pantallas estrechas no cabe "We are [video] Elevate" en una
+     fila: los titulares se irían fuera de pantalla. Se bajan juntos
+     debajo del video, leyéndose como una sola línea. */
+  .sabout_welcome {
+    bottom: auto;
+    top: calc(50% - 8.6rem); /* encima del video (12rem de alto) */
+  }
+
+  .sabout_heading {
+    top: calc(50% + 7.2rem); /* debajo del video */
+  }
+
+  /* Se anclan al eje central dejando un hueco de palabra entre ambos.
+     El desplazamiento compensa que "Elevate" es más ancha que "We are":
+     sin él la frase completa quedaría escorada a la derecha. */
+  .sabout_heading.h1 { right: calc(50% + .16em); left: auto; transform: translateX(-.49em); }
+  .sabout_heading.h2 { left: calc(50% + .16em); right: auto; transform: translateX(-.49em); }
+
+  /* En estrecho, los dos rótulos inferiores se pisaban al ir uno
+     centrado y otro a la izquierda: se reparten a los extremos */
+  .sabout_note { right: 1.25rem; left: auto; font-size: .75rem; }
+  .sabout_location { font-size: .875rem; }
+}
+
+/* Muy estrecho: el video ocupa casi todo el ancho */
+@media (max-width: 400px) {
+  .sabout_img-wrap { width: calc(100vw - 3rem); height: 11rem; }
+  .sabout_welcome { top: calc(50% - 8rem); }
+  .sabout_heading { top: calc(50% + 6.6rem); }
 }

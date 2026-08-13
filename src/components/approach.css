@@ -32,7 +32,17 @@ img.approach_media {
   will-change: transform;
 }
 
-canvas.approach_media { filter: blur(14px) saturate(1.1); transform-origin: center; }
+/* El esquema del ecosistema debe verse entero: recortarlo cortaría los
+   logos de los extremos. Placa clara para que se lea en ambos temas. */
+.approach_img-wrap.is-diagram {
+  background: #fff;
+  border: 1px solid var(--grey-100);
+}
+
+.approach_img-wrap.is-diagram .approach_media {
+  object-fit: contain;
+  padding: .5rem;
+}
 
 .approach_content {
   display: flex;

@@ -31,6 +31,23 @@
 
 .footer_lists { display: flex; gap: 4rem; }
 
+/* Columna de contacto, alineada a la derecha del footer */
+.footer_group--contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-left: auto;
+}
+
+.footer_address {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  font-style: normal;
+}
+
+.footer_address a { display: flex; flex-direction: column; }
+
 .footer_list { display: flex; flex-direction: column; gap: .7rem; }
 
 .footer_link {

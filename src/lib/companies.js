@@ -254,3 +254,13 @@ export const ELEVATE_SOCIAL = {
   instagram: null,
   facebook: null,
 }
+
+/**
+ * Contacto del grupo para el footer. Teléfono y email siguen sin
+ * confirmar: quedan en null y no se pintan hasta que existan.
+ */
+export const ELEVATE_CONTACT = {
+  address: ['917 Dinwiddie St', 'Knoxville, TN 37921'],
+  phone: null,
+  email: null,
+}

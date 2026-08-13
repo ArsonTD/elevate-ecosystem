@@ -29,7 +29,21 @@ export default function Navbar({ pathname = '/' }) {
         .from('.navbar_logo-wrap', { y: -24, autoAlpha: 0, duration: .9 }, .2)
         .from('.navbar_links-wrap', { y: -24, autoAlpha: 0, duration: .9, clearProps: 'opacity,visibility,transform' }, .3)
         .from('.navbar_link, .navbar_cta', { yPercent: 120, duration: .7, stagger: .06 }, .45)
-        .from('.navbar_hamburger-line', { scaleX: 0, duration: .6, stagger: .08 }, .5)
+        /**
+         * La hamburguesa es el único acceso al menú en móvil, así que su
+         * visibilidad no puede depender de que la animación termine:
+         *  - immediateRender: false → si el tween nunca arranca, las
+         *    líneas se quedan como las pinta el CSS (visibles), en vez
+         *    de congeladas en scaleX(0).
+         *  - clearProps → al acabar se retira el transform en línea.
+         */
+        .from('.navbar_hamburger-line', {
+          scaleX: 0,
+          duration: .6,
+          stagger: .08,
+          immediateRender: false,
+          clearProps: 'transform',
+        }, .5)
     }, ref)
     return () => ctx.revert()
   }, [])
