@@ -125,15 +125,15 @@ export default function Contact() {
                   <div className="contact_row">
                     <label className="contact_field">
                       <span className="contact_label">Name</span>
-                      <input type="text" name="name" autoComplete="name" required />
+                      <input type="text" name="name" autoComplete="name" placeholder="Jane Carter" required />
                     </label>
                     <label className="contact_field">
                       <span className="contact_label">Email</span>
-                      <input type="email" name="email" autoComplete="email" required />
+                      <input type="email" name="email" autoComplete="email" placeholder="jane@email.com" required />
                     </label>
                     <label className="contact_field">
                       <span className="contact_label">Phone (optional)</span>
-                      <input type="tel" name="phone" autoComplete="tel" />
+                      <input type="tel" name="phone" autoComplete="tel" placeholder="(865) 555-0142" />
                     </label>
                   </div>
 

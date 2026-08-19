@@ -80,6 +80,14 @@
   transition: border-color .25s;
 }
 
+/* Sin esto el placeholder usa el color por defecto del navegador,
+   que no sigue el tema y queda ilegible en oscuro */
+.contact_field input::placeholder,
+.contact_field textarea::placeholder {
+  color: var(--grey-300);
+  opacity: 1; /* Firefox lo atenúa por su cuenta */
+}
+
 .contact_field input:focus,
 .contact_field textarea:focus {
   outline: none;
