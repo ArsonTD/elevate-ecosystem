@@ -71,7 +71,7 @@ export default function Brands() {
               <h2 className="text-style-label">The ecosystem</h2>
             </div>
             <h3 className="heading-h4 brands_heading">
-              Lighting, painting, remodeling, moving, carpentry and AV —
+              Lighting, construction, wall finishes, painting, logistics and AV —
               companies that already know each other and work as one group.
             </h3>
           </div>

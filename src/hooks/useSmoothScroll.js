@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger, reducedMotion } from '../lib/gsapSetup'
 
-/** Scroll suave estilo Webflow/Lenis sincronizado con ScrollTrigger. */
+
 export function useSmoothScroll() {
   useEffect(() => {
     if (reducedMotion) return

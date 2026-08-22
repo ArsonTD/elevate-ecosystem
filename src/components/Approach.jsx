@@ -11,7 +11,7 @@ const ITEMS = [
   },
   {
     title: 'Smart routing',
-    text: 'Each part of your inquiry reaches the right company automatically: lighting to Afterimage, paint to Luv Painting, remodeling to Monarch — with Elevate keeping a copy.',
+    text: 'Each part of your inquiry reaches the right company automatically: lighting to Afterimage, paint to Luv Painting, renovations to Parallel — with Elevate keeping a copy.',
     img: '/photos/ecosystem-diagram.jpg', // esquema del ecosistema
     diagram: true, // se muestra entero (contain), no recortado
   },

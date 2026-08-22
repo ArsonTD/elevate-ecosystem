@@ -2,23 +2,18 @@
  * Datos del ecosistema Elevate: las seis empresas, escenarios de
  * cross-discovery y el mapa servicio → empresa del formulario router.
  *
- * NOTA: descripciones, servicios y especialidades de Monarch, Parallel,
- * Cutting Edge y AVS son PLACEHOLDERS deducidos de la propuesta —
- * reemplazar con el contenido real que entregue Elevate.
+ * Descripciones, categorías y servicios confirmados por el cliente el
+ * 2026-08-20. Corrigieron dos suposiciones anteriores: Monarch es
+ * logística para estudios de interiorismo (no obra) y Parallel es la
+ * constructora (no mudanzas); Cutting Edge hace acabados de pared, no
+ * carpintería. SCENARIOS y SERVICE_OPTIONS se reajustaron en
+ * consecuencia, porque el formulario enrutaba a la empresa equivocada.
  *
- * PENDIENTE DE CONFIRMAR CON EL CLIENTE (2026-08-03):
- *  - Monarch / Parallel: sus webs sugieren lo contrario de lo asignado
- *    aquí — monarchdesignersolutions.com se presenta como "logistics
- *    services tailored to interior designers" (+ Monarch Moving), y
- *    parallelconstruction.com es constructora. Se mantiene la
- *    asignación actual por decisión del cliente; si resulta invertida,
- *    hay que intercambiar category/tagline/desc/services/specialties
- *    y revisar SCENARIOS + SERVICE_OPTIONS (afecta el routing del form).
- *  - Parallel Construction tiene sede en Maryville, TN y no hay vínculo
- *    publicado con Elevate: confirmar que es la empresa correcta.
- *  - Cutting Edge Finishes y Luv Painting: sin presencia web localizada
- *    en Knoxville. Los homónimos que aparecen en buscadores son de otros
- *    estados (Oregón/Washington y Florida/Minnesota) — NO usarlos.
+ * PENDIENTE:
+ *  - Cutting Edge Finishes y Luv Painting: sin web ni redes localizadas.
+ *    Los homónimos de buscadores son de otros estados — NO usarlos.
+ *  - Electrical y Plumbing: ninguna de las seis los declara, así que
+ *    entran por el inbox central de Elevate.
  *  - EMF: logo entregado pero empresa no identificada. El archivo está
  *    en public/logos/emf.png, sin usar hasta que el cliente lo aclare.
  */
@@ -50,11 +45,11 @@ export const COMPANIES = [
     logo: '/logos/afterimage-lighting.png',
     name: 'Afterimage Lighting',
     category: 'Lighting',
-    tagline: 'Architectural & landscape lighting',
-    desc: 'Lighting design and installation for homes and commercial properties — from landscape and architectural lighting to full LED upgrades.',
-    services: ['Lighting design', 'Landscape lighting', 'Architectural accents', 'LED retrofits', 'Fixture installation'],
-    specialties: ['Outdoor & landscape lighting', 'Holiday & event lighting', 'Energy-efficient upgrades'],
-    related: ['avs', 'luv-painting'],
+    tagline: 'Architectural & decorative lighting',
+    desc: 'Architectural and decorative lighting — design and distribution.',
+    services: ['Lighting design', 'Architectural lighting', 'Decorative lighting', 'Distribution'],
+    specialties: ['Architectural lighting', 'Decorative fixtures', 'Design & distribution'],
+    related: ['avs', 'cutting-edge'],
     links: {
       site: 'https://www.afterimagelighting.com/',
       instagram: 'https://www.instagram.com/afterimagelighting/',
@@ -76,12 +71,12 @@ export const COMPANIES = [
     slug: 'monarch',
     logo: '/logos/monarch.webp',
     name: 'Monarch',
-    category: 'Remodeling',
-    tagline: 'Renovation & remodeling',
-    desc: 'Full-scope remodeling and renovation — kitchens, baths and whole-property updates, managed from demo to final walkthrough.',
-    services: ['Kitchen & bath remodeling', 'Interior renovation', 'Property updates', 'Project management'],
-    specialties: ['Kitchen & bath', 'Rental turnovers', 'Whole-property renovation'],
-    related: ['cutting-edge', 'luv-painting'],
+    category: 'Logistics',
+    tagline: 'Receiving, storage & installation',
+    desc: 'Receiving, inspecting, storage and installations for interior design firms.',
+    services: ['Receiving', 'Inspecting', 'Storage', 'Installations'],
+    specialties: ['Support for interior design firms', 'Warehousing & inspection', 'White-glove installation'],
+    related: ['parallel', 'cutting-edge'],
     links: {
       site: 'https://www.monarchdesignersolutions.com/',
       instagram: 'https://www.instagram.com/monarch_designersolutions/',
@@ -101,12 +96,12 @@ export const COMPANIES = [
     slug: 'parallel',
     logo: '/logos/parallel.webp',
     name: 'Parallel',
-    category: 'Moving',
-    tagline: 'Furniture moving & staging',
-    desc: 'Furniture moving, staging and on-site logistics — careful crews that get properties emptied, filled or show-ready on schedule.',
-    services: ['Furniture moving', 'Staging & placement', 'Delivery & assembly', 'On-site logistics'],
-    specialties: ['Property staging', 'In-home moves', 'Coordinated with renovation crews'],
-    related: ['monarch', 'luv-painting'],
+    category: 'Construction',
+    tagline: 'Renovations, additions & custom homes',
+    desc: 'Renovations, additions and custom homes.',
+    services: ['Renovations', 'Additions', 'Custom homes'],
+    specialties: ['Whole-home renovation', 'Additions', 'New custom builds'],
+    related: ['cutting-edge', 'luv-painting'],
     links: {
       site: 'https://www.parallelconstruction.com/',
       instagram: 'https://www.instagram.com/parallelconstructionservices/',
@@ -126,12 +121,12 @@ export const COMPANIES = [
     slug: 'cutting-edge',
     logo: '/logos/cutting-edge.png',
     name: 'Cutting Edge',
-    category: 'Carpentry',
-    tagline: 'Flooring & finish carpentry',
-    desc: 'Flooring, trim and finish carpentry — the detail work that makes a renovation read as done, from doors and hardware to custom builds.',
-    services: ['Flooring installation', 'Trim & finish carpentry', 'Doors & hardware', 'Custom builds'],
-    specialties: ['Hardwood & LVP flooring', 'Finish trim packages', 'Built-ins'],
-    related: ['monarch', 'afterimage-lighting'],
+    category: 'Finishes',
+    tagline: 'Drywall, plaster & wall coverings',
+    desc: 'Drywall, Venetian plaster and wall coverings.',
+    services: ['Drywall', 'Venetian plaster', 'Wall coverings'],
+    specialties: ['Venetian plaster', 'Specialty wall coverings', 'Drywall finishing'],
+    related: ['parallel', 'luv-painting'],
     links: { site: null, instagram: null, facebook: null, linkedin: null },
     phone: null,
     email: null,
@@ -172,11 +167,11 @@ export const COMPANIES = [
     logo: '/logos/luv-painting.png',
     name: 'Luv Painting',
     category: 'Painting',
-    tagline: 'Interior & exterior painting',
-    desc: 'Interior and exterior painting with clean prep and clean lines — drywall repair, cabinet refinishing and specialty finishes included.',
-    services: ['Interior painting', 'Exterior painting', 'Drywall repair', 'Cabinet refinishing', 'Specialty finishes'],
-    specialties: ['Repaint before sale or rental', 'Cabinet & trim work', 'Commercial repaints'],
-    related: ['monarch', 'parallel'],
+    tagline: 'Painting',
+    desc: 'Painting.',
+    services: ['Painting'],
+    specialties: ['Interior painting', 'Exterior painting'],
+    related: ['parallel', 'cutting-edge'],
     links: { site: null, instagram: null, facebook: null, linkedin: null },
     phone: null,
     email: null,
@@ -200,22 +195,22 @@ export const getCompany = (slug) => COMPANIES.find((c) => c.slug === slug)
 export const SCENARIOS = [
   {
     title: 'Renovating a property',
-    desc: 'Remodeling, flooring, paint and lighting — one submission covers the whole scope.',
-    companies: ['monarch', 'cutting-edge', 'luv-painting', 'afterimage-lighting'],
+    desc: 'Construction, drywall and plaster, paint and lighting — one submission covers the whole scope.',
+    companies: ['parallel', 'cutting-edge', 'luv-painting', 'afterimage-lighting'],
     seed: 'elv-scene-renovate',
     img: '1595814432314-90095f342694',
   },
   {
-    title: 'Moving in or moving out',
-    desc: 'Furniture moved, walls freshened, AV and Wi-Fi running from day one.',
-    companies: ['parallel', 'luv-painting', 'avs'],
+    title: 'Furnishing a design project',
+    desc: 'Pieces received, inspected and stored until install day — with lighting and AV to match.',
+    companies: ['monarch', 'afterimage-lighting', 'avs'],
     seed: 'elv-scene-move',
     img: '1586023492125-27b2c045efd7',
   },
   {
-    title: 'Upgrading a space',
-    desc: 'Lighting, smart-home systems and finish work that lift the property’s value.',
-    companies: ['afterimage-lighting', 'avs', 'cutting-edge'],
+    title: 'Building or adding on',
+    desc: 'Additions and custom homes, finished inside with plaster, paint and smart systems.',
+    companies: ['parallel', 'cutting-edge', 'avs'],
     seed: 'elv-scene-upgrade',
     img: '1590725140246-20acdee442be',
   },
@@ -227,18 +222,20 @@ export const SCENARIOS = [
  * inquiry al inbox correcto + copia al inbox central de Elevate.
  */
 export const SERVICE_OPTIONS = [
-  { id: 'lighting',   label: 'Lighting',                   slug: 'afterimage-lighting' },
-  { id: 'electrical', label: 'Electrical',                 slug: 'afterimage-lighting' },
-  { id: 'remodeling', label: 'Remodeling & renovation',    slug: 'monarch' },
-  { id: 'moving',     label: 'Furniture moving & staging', slug: 'parallel' },
-  { id: 'flooring',   label: 'Flooring & finish carpentry', slug: 'cutting-edge' },
-  { id: 'av',         label: 'Audio, video & smart home',  slug: 'avs' },
-  { id: 'painting',   label: 'Painting',                   slug: 'luv-painting' },
-  { id: 'plaster',    label: 'Plaster',                    slug: 'luv-painting' },
-  { id: 'wallpaper',  label: 'Wallpaper',                  slug: 'luv-painting' },
-  // Sin empresa asignada todavía: entra por el inbox central de Elevate,
-  // que lo deriva. Igual servirá cuando se sumen empresas nuevas.
-  { id: 'plumbing',   label: 'Plumbing',                   slug: null },
+  { id: 'lighting',    label: 'Lighting',                    slug: 'afterimage-lighting' },
+  { id: 'renovation',  label: 'Renovations',                 slug: 'parallel' },
+  { id: 'additions',   label: 'Additions',                   slug: 'parallel' },
+  { id: 'customhome',  label: 'Custom homes',                slug: 'parallel' },
+  { id: 'drywall',     label: 'Drywall',                     slug: 'cutting-edge' },
+  { id: 'plaster',     label: 'Venetian plaster',            slug: 'cutting-edge' },
+  { id: 'wallcover',   label: 'Wall coverings / wallpaper',  slug: 'cutting-edge' },
+  { id: 'painting',    label: 'Painting',                    slug: 'luv-painting' },
+  { id: 'av',          label: 'Audio, video & smart home',   slug: 'avs' },
+  { id: 'receiving',   label: 'Receiving, storage & installation', slug: 'monarch' },
+  // Sin empresa asignada: entran por el inbox central de Elevate, que
+  // los deriva. Ninguna de las seis declara estos oficios.
+  { id: 'electrical',  label: 'Electrical',                  slug: null },
+  { id: 'plumbing',    label: 'Plumbing',                    slug: null },
 ]
 
 /** Nombre del destinatario de un servicio, para mostrar en el formulario. */
