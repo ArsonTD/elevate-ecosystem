@@ -95,7 +95,7 @@ export const COMPANIES = [
   {
     slug: 'parallel',
     logo: '/logos/parallel.webp',
-    name: 'Parallel',
+    name: 'Parallel Construction',
     category: 'Construction',
     tagline: 'Renovations, additions & custom homes',
     desc: 'Renovations, additions and custom homes.',
