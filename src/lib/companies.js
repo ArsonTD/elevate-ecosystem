@@ -1,38 +1,6 @@
-/**
- * Datos del ecosistema Elevate: las seis empresas, escenarios de
- * cross-discovery y el mapa servicio → empresa del formulario router.
- *
- * Descripciones, categorías y servicios confirmados por el cliente el
- * 2026-08-20. Corrigieron dos suposiciones anteriores: Monarch es
- * logística para estudios de interiorismo (no obra) y Parallel es la
- * constructora (no mudanzas); Cutting Edge hace acabados de pared, no
- * carpintería. SCENARIOS y SERVICE_OPTIONS se reajustaron en
- * consecuencia, porque el formulario enrutaba a la empresa equivocada.
- *
- * PENDIENTE:
- *  - Cutting Edge Finishes y Luv Painting: sin web ni redes localizadas.
- *    Los homónimos de buscadores son de otros estados — NO usarlos.
- *  - Electrical y Plumbing: ninguna de las seis los declara, así que
- *    entran por el inbox central de Elevate.
- *  - EMF: logo entregado pero empresa no identificada. El archivo está
- *    en public/logos/emf.png, sin usar hasta que el cliente lo aclare.
- */
-
-/**
- * Prefijo del sitio: "/" en local y "/<repo>/" al publicarlo en
- * GitHub Pages. Todo lo que viva en public/ debe pasar por aquí o
- * daría 404 al desplegar en un subdirectorio.
- */
 export const asset = (path) =>
   import.meta.env.BASE_URL + String(path).replace(/^\//, '')
 
-/**
- * Fuente de imagen. Acepta dos cosas:
- *  - una ruta local que empieza por "/" → foto real del cliente,
- *    resuelta contra el prefijo del sitio (el recorte lo hace el
- *    object-fit del CSS)
- *  - un id de Unsplash → se pide ya recortado al tamaño pedido
- */
 export const photo = (src, w, h) => {
   if (!src) return ''
   if (src.startsWith('/')) return asset(src)
@@ -45,7 +13,7 @@ export const COMPANIES = [
     logo: '/logos/afterimage-lighting.png',
     name: 'Afterimage Lighting',
     category: 'Lighting',
-    tagline: 'Architectural & decorative lighting',
+    tagline: 'Architectural & Decorative Lighting',
     desc: 'Architectural and decorative lighting — design and distribution.',
     services: ['Lighting design', 'Architectural lighting', 'Decorative lighting', 'Distribution'],
     specialties: ['Architectural lighting', 'Decorative fixtures', 'Design & distribution'],
@@ -62,8 +30,6 @@ export const COMPANIES = [
     img: '/photos/afterimage-card.jpg',
     gallery: ['/photos/afterimage-lighting.jpg'],
     grad: ['#ffb347', '#2b1600'],
-    // Video de la tarjeta pequeña del listado. Sin él, esa tarjeta cae
-    // al gradiente de `grad`.
     cardVideo: '/video/card-afterimage-lighting.mp4',
     cardPoster: '/video/card-afterimage-lighting-poster.jpg',
   },
@@ -72,7 +38,7 @@ export const COMPANIES = [
     logo: '/logos/monarch.webp',
     name: 'Monarch',
     category: 'Logistics',
-    tagline: 'Receiving, storage & installation',
+    tagline: 'Receiving, Storage & Installation',
     desc: 'Receiving, inspecting, storage and installations for interior design firms.',
     services: ['Receiving', 'Inspecting', 'Storage', 'Installations'],
     specialties: ['Support for interior design firms', 'Warehousing & inspection', 'White-glove installation'],
@@ -157,7 +123,6 @@ export const COMPANIES = [
     email: 'info@avsdc.com',
     seed: 'elv-co-av',
     img: '/photos/avs-fireplace.jpg',
-    // Sin video todavía: la tarjeta pequeña se queda en foto fija.
     cardPoster: '/photos/avs-card.jpg',
     gallery: ['/photos/avs-frame-tv.jpg'],
     grad: ['#7a5cff', '#120a2e'],
@@ -177,7 +142,6 @@ export const COMPANIES = [
     email: null,
     seed: 'elv-co-painting',
     img: '1562259949-e8e7689d7828',
-    // Carrusel de la tarjeta pequeña: cruza entre estas fotos en bucle.
     cardImages: [
       '/photos/luv-card-1.jpg',
       '/photos/luv-card-2.jpg',
@@ -191,7 +155,7 @@ export const COMPANIES = [
 
 export const getCompany = (slug) => COMPANIES.find((c) => c.slug === slug)
 
-/** Escenarios "Solutions by project" (cross-discovery). */
+
 export const SCENARIOS = [
   {
     title: 'Renovating a property',
@@ -216,11 +180,6 @@ export const SCENARIOS = [
   },
 ]
 
-/**
- * Opciones del formulario router: servicio visible → empresa destino.
- * El backend (función serverless) usará este mapa para enrutar cada
- * inquiry al inbox correcto + copia al inbox central de Elevate.
- */
 export const SERVICE_OPTIONS = [
   { id: 'lighting',    label: 'Lighting',                    slug: 'afterimage-lighting' },
   { id: 'renovation',  label: 'Renovations',                 slug: 'parallel' },
@@ -232,30 +191,19 @@ export const SERVICE_OPTIONS = [
   { id: 'painting',    label: 'Painting',                    slug: 'luv-painting' },
   { id: 'av',          label: 'Audio, video & smart home',   slug: 'avs' },
   { id: 'receiving',   label: 'Receiving, storage & installation', slug: 'monarch' },
-  // Sin empresa asignada: entran por el inbox central de Elevate, que
-  // los deriva. Ninguna de las seis declara estos oficios.
   { id: 'electrical',  label: 'Electrical',                  slug: null },
   { id: 'plumbing',    label: 'Plumbing',                    slug: null },
 ]
 
-/** Nombre del destinatario de un servicio, para mostrar en el formulario. */
 export const routeTarget = (option) =>
   option.slug ? getCompany(option.slug).name : 'the Elevate team'
 
-/**
- * Redes del grupo Elevate. Solo se renderizan las que tengan URL:
- * dejar en null lo que no exista todavía (nada de enlaces rotos).
- */
 export const ELEVATE_SOCIAL = {
   linkedin: null,
   instagram: null,
   facebook: null,
 }
 
-/**
- * Contacto del grupo para el footer. Teléfono y email siguen sin
- * confirmar: quedan en null y no se pintan hasta que existan.
- */
 export const ELEVATE_CONTACT = {
   address: ['917 Dinwiddie St', 'Knoxville, TN 37921'],
   phone: null,

@@ -8,14 +8,6 @@ import './company.css'
 
 const LINK_ORDER = ['site', 'instagram', 'facebook', 'linkedin']
 
-/**
- * Plantilla compartida de empresa (referencia GSV): panel de info a la
- * izquierda + imagen a la derecha, servicios y especialidades, y
- * cross-discovery con las empresas relacionadas del grupo.
- *
- * `slug` llega como prop desde companies/[slug].astro, que genera una
- * página estática por empresa (getStaticPaths solo emite slugs válidos).
- */
 export default function Company({ slug }) {
   const company = getCompany(slug)
   const ref = useRef(null)
